@@ -13,7 +13,10 @@ import store from './store'
 import router from './router'
 
 import '@/icons' // icon
-import '@/permission' // permission control
+// import '@/permission' // permission control
+
+import echarts from 'echarts'
+Vue.prototype.$echarts = echarts
 
 /**
  * If you don't want to use mock-server
