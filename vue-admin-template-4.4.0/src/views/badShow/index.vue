@@ -5,16 +5,16 @@
         <div class="show">
           <div class="topBarHold">
             <div class="topBar">
-              <div class="icon"></div>
+              <div class="icon" />
               <a target="_blank" href="//www.baidu.com">百度首页</a>
             </div>
           </div>
           <header class="header">
             <div class="iconAALocation">
-              <div class="icon"></div>
+              <div class="icon" />
               <div class="location">
                 <span class="location-word">切换地区</span>
-                <span class="location-arrow"></span>
+                <span class="location-arrow" />
               </div>
             </div>
             <div class="others">
@@ -32,23 +32,23 @@
               <h4>国内疫情</h4>
               <div class="update-explain">
                 <h5>数据更新至 2020.12.08 17:07</h5>
-                <div class="dataExplain" ><div class="dataExplainIcon"></div><span>数据说明</span></div>
+                <div class="dataExplain"><div class="dataExplainIcon" /><span>数据说明</span></div>
               </div>
             </div>
             <div class="content-badData">
               <ul>
                 <li>
-                  <div class="spanOut">现有确诊<span></span></div>
+                  <div class="spanOut">现有确诊<span /></div>
                   <div class="badData-num">1679</div>
                   <div class="badData-change">昨日+18</div>
                 </li>
                 <li>
-                  <div class="spanOut">无症状<span></span></div>
+                  <div class="spanOut">无症状<span /></div>
                   <div class="badData-num">219</div>
                   <div class="badData-change">昨日+5</div>
                 </li>
                 <li>
-                  <div class="spanOut">现有疑似<span></span></div>
+                  <div class="spanOut">现有疑似<span /></div>
                   <div class="badData-num">3</div>
                   <div class="badData-change">昨日+1</div>
                 </li>
@@ -79,31 +79,46 @@
                 </li>
               </ul>
             </div>
-            <div class="firstBigMapHold"></div>
-            <div id="firstBigMap"></div>
+            <div class="firstBigMapHold" />
+            <div id="firstBigMap" />
           </section>
-          <footer></footer>
+          <footer />
         </div>
       </div>
     </div>
   </div>
 </template>
-
+<script>
+window.onload = function() {
+  alert('123123')
+}
+</script>
 <!--<script src="https://echarts.apache.org/examples/vendors/echarts/echarts.min.js?_v_=1578305236132"></script>-->
 <!--<script src="../../utils/echarts/echarts.min.js"></script>-->
-<script src="../../utils/echarts/china.js"></script>
-<!--<script src="https://echarts.apache.org/examples/vendors/echarts/map/js/china.js?_v_=1578305236132"></script>-->
+<!--<script src="../../utils/echarts/china.js"></script>-->
+
 <script>
-import echarts from 'echarts'
+
+</script>
+<script>
+import '../../utils/echarts/china.js'// eslint-disable-line
 export default {
+
   name: 'BadShow',
   mounted() {
-    //初始化echarts实例
-    //初始化echarts实例
-    // let echarts = require('echarts');
-    let myChart = echarts.init(document.getElementById('firstBigMap'));
-    // 指定图表的配置项和数据
-    let option = {
+    // $.get('../../utils/echarts/china.json', function (chinaJson) {
+    //   echarts.registerMap('china', chinaJson);
+    //   var chart = this.$echarts.init(document.getElementById('firstBigMap'));
+    //   chart.setOption({
+    //     series: [{
+    //       type: 'map',
+    //       map: 'china'
+    //     }]
+    //   });
+    // });
+    // var echarts = require('echarts');
+    var myChart = this.$echarts.init(document.getElementById('firstBigMap'))
+    myChart.setOption({
       title: {
         text: '中国疫情图',
         left: 'center'
@@ -123,7 +138,7 @@ export default {
           { min: 500, max: 999, label: '确诊500-999人', color: '#4e160f' },
           { min: 100, max: 499, label: '确诊100-499人', color: '#974236' },
           { min: 10, max: 99, label: '确诊10-99人', color: '#ee7263' },
-          { min: 1, max: 9, label: '确诊1-9人', color: '#f5bba7' },
+          { min: 1, max: 9, label: '确诊1-9人', color: '#f5bba7' }
         ],
         color: ['#E0022B', '#E09107', '#A3E00B']
       },
@@ -263,16 +278,13 @@ export default {
           ]
         }
       ]
-    };
-
-    //使用指定的配置项和数据显示图表
-    myChart.setOption(option);
-  },
+    })
+  }
 }
 </script>
 <style scoped>
   #firstBigMap{
-    width: 1000px;
+    width: 700px;
     height: 500px;
   }
   .active {
