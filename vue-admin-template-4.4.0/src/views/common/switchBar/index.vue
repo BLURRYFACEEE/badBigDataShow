@@ -1,7 +1,8 @@
 <template>
   <div class="main">
     <ul :style="ulGetAllStyle">
-      <li v-for="(item,index) in tabArr" :key="index" :class="{active:getBackProperty.activeType1 && currentIndex === index,active2:getBackProperty.activeType2 && currentIndex === index,active3:getBackProperty.activeType3 && currentIndex === index}" @click="tabItemClick(index)">{{ item }}</li>
+      <!--      <a v-for="(item,index) in tabArr" :key="index" :class="{active:getBackProperty.activeType1 && currentIndex === index,active2:getBackProperty.activeType2 && currentIndex === index,active3:getBackProperty.activeType3 && currentIndex === index}" @click="tabItemClick(index)">{{ item }}</a>-->
+      <a v-for="(item,index) in tabArr" :key="index" :class="{active:getBackProperty.activeType1 && currentIndex === index,active2:getBackProperty.activeType2 && currentIndex === index,active3:getBackProperty.activeType3 && currentIndex === index}" @click="tabItemClick(index,$event)">{{ item }}</a>
     </ul>
   </div>
 </template>
@@ -34,7 +35,8 @@ export default {
   data() {
     return {
       currentIndex: 0,
-      click: false
+      click: false,
+      fly: 0.5
     }
   },
   computed: {
@@ -60,6 +62,17 @@ export default {
       this.currentIndex = eIndex
       this.$emit('tabDadClick', eIndex)
     }
+    // tabItemClick(eIndex, e) {
+    // let otherIndex = 0
+    // this.fly = otherIndex === eIndex ? '50%' : '-50%'
+    // otherIndex = otherIndex === eIndex ? 1 : 0
+    // e.target.style.left = this.fly
+    // e.target.parentElement.children[otherIndex].style.left = '-' + this.fly
+    // console.log('-' + this.fly)
+    // console.log(e.target.parentElement.children[otherIndex])
+    // console.log(eIndex)
+    // console.log(e)
+  //   }
   }
 }
 </script>
@@ -76,8 +89,10 @@ export default {
   list-style: none;
   width: 100%;
   padding: 0;
+  margin: 0;
 }
-.main ul li {
+.main ul a {
+  position: relative;
   height: 50px;
   line-height: 50px;
   text-align: center;

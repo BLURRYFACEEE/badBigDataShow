@@ -3,11 +3,14 @@
     <div id="main">
       <div class="base">
         <div class="show">
-          <div class="topBarHold">
-            <div class="topBar">
-              <div class="icon" />
-              <a target="_blank" href="//www.baidu.com">百度首页</a>
+          <div class="pageTop">
+            <div class="topBarHold">
+              <div class="topBar">
+                <div class="icon" />
+                <a target="_blank" href="//www.baidu.com">百度首页</a>
+              </div>
             </div>
+            <!--            <SwitchBar  v-show="courtyTopChooseCheck" :tab-arr="topCountryTab" :get-back-property="{'ulBackgroundColor':'#fff','activeType2':true}" class="courtyTopChoose" @tabDadClick="recSonClickTop" />-->
           </div>
           <header class="header">
             <div class="iconAALocation">
@@ -25,7 +28,7 @@
           </header>
           <section class="content">
             <div class="content-getCountryBar">
-              <SwitchBar :tab-arr="topCountryTab" :get-back-property="{'ulBackgroundColor':'#fff','activeType2':true}" /></div>
+              <SwitchBar ref="child" :tab-arr="topCountryTab" :get-back-property="{'ulBackgroundColor':'#fff','activeType2':true}" :class="{courtyTopChoose:courtyTopChooseCheck}" @tabDadClick="recSonClickTop" /></div>
             <div class="content-badExplain">
               <h4>国内疫情</h4>
               <div class="update-explain">
@@ -79,6 +82,10 @@
             </div>
             <div class="firstBigMapHold" />
             <div class="bigmap">
+<!--              <div class="unique">-->
+<!--                <div>累计确诊</div>-->
+<!--                <div>现有确诊</div>-->
+<!--              </div>-->
               <SwitchBar :tab-arr="firstMapTab" :get-back-property="{'activeType1':true}" @tabDadClick="recSonClickFirst" />
               <div id="firstBigMap-Pic" />
             </div>
@@ -91,49 +98,83 @@
               <SwitchBar :tab-arr="thirdMapTab" :get-back-property="{'activeType3':true}" @tabDadClick="recSonClickThird" />
             </div>
             <div id="locationDetailTable1">
-              <div class="title">
-                <ul>
-                  <li>疫情地区</li>
-                  <li>新增</li>
-                  <li>现有</li>
-                  <li>累计</li>
-                  <li>治愈</li>
-                  <li>死亡</li>
-                </ul>
-              </div>
+              <!--              <div class="title">-->
+              <!--                <ul>-->
+              <!--                  <li>疫情地区</li>-->
+              <!--                  <li>新增</li>-->
+              <!--                  <li>现有</li>-->
+              <!--                  <li>累计</li>-->
+              <!--                  <li>治愈</li>-->
+              <!--                  <li>死亡</li>-->
+              <!--                </ul>-->
+              <!--              </div>-->
               <div class="location-num">
-                <ul v-for="(item,index) in locationNumTest1" :key="index">
-                  <li class="location">{{ item.location }}</li>
-                  <li>{{ item.add }}</li>
-                  <li>{{ item.now }}</li>
-                  <li>{{ item.sum }}</li>
-                  <li>{{ item.heal }}</li>
-                  <li>{{ item.death }}</li>
-                </ul>
-                <ul v-for="(item,index) in locationNumTest2" v-show="!listSpreadCheck" :key="index">
-                  <li class="location">{{ item.location }}</li>
-                  <li>{{ item.add }}</li>
-                  <li>{{ item.now }}</li>
-                  <li>{{ item.sum }}</li>
-                  <li>{{ item.heal }}</li>
-                  <li>{{ item.death }}</li>
-                </ul>
+                <!--                <ul v-for="(item,index) in locationNumTest1" :key="'location1'+index">-->
+                <!--                  <li class="location">{{ item.location }}</li>-->
+                <!--                  <li>{{ item.add }}</li>-->
+                <!--                  <li>{{ item.now }}</li>-->
+                <!--                  <li>{{ item.sum }}</li>-->
+                <!--                  <li>{{ item.heal }}</li>-->
+                <!--                  <li>{{ item.death }}</li>-->
+                <!--                </ul>-->
+                <table class="dataTable1">
+                  <thead class="title">
+                    <tr>
+                      <td>疫情地区</td>
+                      <td>新增<span @click="upSort">up</span><span @click="downSort">down</span></td>
+                      <td>现有</td>
+                      <td>累计</td>
+                      <td>治愈</td>
+                      <td>死亡</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(item,index) in locationNumTest1" :key="'location1'+index">
+                      <td class="location">{{ item.location }}</td>
+                      <td>{{ item.add }}</td>
+                      <td>{{ item.now }}</td>
+                      <td>{{ item.sum }}</td>
+                      <td>{{ item.heal }}</td>
+                      <td>{{ item.death }}</td>
+                    </tr>
+                    <tr v-for="(item,index) in locationNumTest2" v-show="!listSpreadCheck" :key="'location2'+index">
+                      <td class="location">{{ item.location }}</td>
+                      <td>{{ item.add }}</td>
+                      <td>{{ item.now }}</td>
+                      <td>{{ item.sum }}</td>
+                      <td>{{ item.heal }}</td>
+                      <td>{{ item.death }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!--                <ul v-for="(item,index) in locationNumTest2" v-show="!listSpreadCheck" :key="'location2'+index">-->
+                <!--                  <li class="location">{{ item.location }}</li>-->
+                <!--                  <li>{{ item.add }}</li>-->
+                <!--                  <li>{{ item.now }}</li>-->
+                <!--                  <li>{{ item.sum }}</li>-->
+                <!--                  <li>{{ item.heal }}</li>-->
+                <!--                  <li>{{ item.death }}</li>-->
+                <!--                </ul>-->
                 <div @click="spreadChange">{{ listSpreadWord }}</div>
               </div>
             </div>
           </section>
-          <div class="ass">积极防护，保护自己，戴口罩，勤洗手
+          <footer class="ass">
+            积极防护，保护自己，戴口罩，勤洗手
             <h4>上百度APP搜索 新型冠状病毒肺炎</h4>
             <h5>了解最新进展及权威预防知识</h5>
-          </div>
-
+          </footer>
         </div>
-        <footer class="last">
-          <span>帮助</span>
-          <span>举报</span>
-          <span>用户反馈</span>
-        </footer>
-        <div class="share"></div>
+        <div class="pageLast">
+          <div class="lastLast">
+            <span>帮助</span>
+            <span>举报</span>
+            <span>用户反馈</span>
+          </div>
+          <tip v-show="tipShowCheck" @shareClose="sonShareClose" />
+          <div v-show="tipLoadShowCheck" class="tipLoad" />
+          <div class="share" @click="tipShow" />
+        </div>
       </div>
     </div>
   </div>
@@ -144,7 +185,7 @@ import '../../utils/echarts/china.js'
 // eslint-disable-line
 export default {
   name: 'BadShow',
-  components: { SwitchBar },
+  components: { Tip, SwitchBar },
   data() {
     return {
       topCountryTab: ['国内疫情', '国外疫情'],
@@ -158,7 +199,8 @@ export default {
           now: 1267,
           sum: 7075,
           heal: 5696,
-          death: 112
+          death: 112,
+          ha: 233
         }, {
           location: '台湾',
           add: 2,
@@ -182,29 +224,33 @@ export default {
           death: 17507
         }
       ],
-      locationNumTest1: [],
-      locationNumTest2: [],
+      // locationNumTest1: [],
+      // locationNumTest2: [],
       listShowCheck: false,
       listSpreadCheck: true,
-      listSpreadWord: '展开全部'
+      listSpreadWord: '展开全部',
+      tipShowCheck: false,
+      tipLoadShowCheck: false,
+      // 滚动距离
+      scrollNum: 0, // 滚动距离
+      courtyTopChooseCheck: false // 是否显示回到顶部按钮
     }
   },
   computed: {
-    cutloactionNum1() {
-      return this.locationNumTest.slice(2)
-    },
-    cutloactionNum2() {
+    locationNumTest1() {
       return this.locationNumTest.slice(0, 2)
+    },
+    locationNumTest2() {
+      return this.locationNumTest.slice(2)
     }
   },
   mounted() {
-    this.locationNumTest1 = this.locationNumTest.slice(0, 2)
-    this.locationNumTest2 = this.locationNumTest.slice(2)
-    console.log(this.locationNumTest)
-    console.log(this.locationNumTest.slice(2))
+    // this.locationNumTest1 = this.locationNumTest.slice(0, 2)
+    // this.locationNumTest2 = this.locationNumTest.slice(2)
     this.getFirstPic()
     this.getSecondPic()
     this.getThirdPic()
+    this.listenScroll()
   },
   methods: {
     getFirstPic(index = 0) {
@@ -549,6 +595,14 @@ export default {
         }]
       })
     },
+    recSonClickTop(index) {
+      if (index === 0) {
+        window.location.href = '/#'
+      } else if (index === 1) {
+        window.location.href = '#secondBigMap-Pic'
+      }
+      console.log(index)
+    },
     recSonClickFirst(index) {
       this.getFirstPic(index)
     },
@@ -561,31 +615,56 @@ export default {
     spreadChange() {
       this.listSpreadCheck = !this.listSpreadCheck
       this.listSpreadWord = this.listSpreadCheck ? '展开全部' : '收起全部'
+    },
+    upSort() {
+      this.locationNumTest.sort(function(a, b) {
+        return a.add - b.add
+      })
+      console.log(this.locationNumTest)
+      // alert('zms')
+    },
+    downSort() {
+      this.locationNumTest.sort(function(a, b) {
+        return b.add - a.add
+      })
+    },
+    sonShareClose() {
+      this.tipShowCheck = false
+    },
+    tipShow() {
+      this.tipLoadShowCheck = true
+      setTimeout(() => {
+        this.tipLoadShowCheck = false
+        this.tipShowCheck = true
+      }, 1000)
+    },
+    listenScroll() {
+      window.addEventListener('scroll', () => {
+        const top =
+          document.documentElement.scrollTop ||
+          document.body.scrollTop ||
+          window.pageYOffset
+        this.scrollNum = top
+        // console.log(top)
+        if (top >= 382) {
+          this.courtyTopChooseCheck = true
+        } else {
+          this.$refs.child.currentIndex = 1
+          this.courtyTopChooseCheck = false
+        }
+        if (top > 1000) {
+          this.$refs.child.currentIndex = 1
+        } else {
+          this.$refs.child.currentIndex = 0
+        }
+      })
     }
   }
 }
 import SwitchBar from '@/views/common/switchBar/index'
+import Tip from '@/views/depent/tip/index'
 </script>
 <style scoped>
-  #firstBigMap-Pic{
-    width: 700px;
-    height: 500px;
-  }
-  #secondBigMap-Pic{
-    width: 700px;
-    height: 500px;
-    /*margin-top: 20px;*/
-  }
-  #thirdBigMap-Pic{
-    width: 700px;
-    height: 500px;
-    /*margin-top: 20px;*/
-  }
-  .active {
-    color: #10aeb5;
-    border-bottom: 2px solid #10aeb5;
-    font-weight: 900;
-  }
   html {
     font-size: 16px !important;
   }
@@ -608,7 +687,7 @@ import SwitchBar from '@/views/common/switchBar/index'
   }
   .show {
     width: 768px;
-    height: 3000px;
+    /*height: 3000px;*/
     margin: 0 auto;
     /*background-color: green;*/
     border-radius: .625rem;
@@ -628,11 +707,13 @@ import SwitchBar from '@/views/common/switchBar/index'
     line-height: 50px;
     align-items: center;
   }
-  .icon {
-    width: 81px;
-    height: 27px;
-    background-image: url("https://mms-res.cdn.bcebos.com/voicefe/captain/images/1b9ddd53f65d1b3a4faeca959e15d425c8d85d2f?117*38");
-    background-size: 100% 100%;
+  .courtyTopChoose {
+    position: fixed;
+    color: #000;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999999;
   }
   .header {
     position: relative;
@@ -650,6 +731,12 @@ import SwitchBar from '@/views/common/switchBar/index'
     padding: 0 10px;
     display: flex;
     justify-content: space-between;
+  }
+  .icon {
+    width: 81px;
+    height: 27px;
+    background-image: url("https://mms-res.cdn.bcebos.com/voicefe/captain/images/1b9ddd53f65d1b3a4faeca959e15d425c8d85d2f?117*38");
+    background-size: 100% 100%;
   }
   .header .location {
     display: flex;
@@ -746,7 +833,7 @@ import SwitchBar from '@/views/common/switchBar/index'
     margin-right: 5px;
   }
   .content-badData {
-    outline: 1px solid #bbccdd;
+    /*outline: 1px solid #bbccdd;*/
     height: 76px;
     margin-top: 30px;
   }
@@ -790,25 +877,58 @@ import SwitchBar from '@/views/common/switchBar/index'
     padding: 1.25rem 1.0625rem 0;
     margin-bottom: 15px;
   }
+  #firstBigMap-Pic{
+    width: 700px;
+    height: 500px;
+  }
+  #secondBigMap-Pic{
+    width: 700px;
+    height: 500px;
+    /*margin-top: 20px;*/
+  }
+  #thirdBigMap-Pic{
+    width: 700px;
+    height: 500px;
+    /*margin-top: 20px;*/
+  }
+  .location-num table {
+    width: 100%;
+  }
   #locationDetailTable1 {
     text-align: center;
   }
-  #locationDetailTable1 ul{
-    list-style: none;
-    display: flex;
-    justify-content: space-around;
+  /*#locationDetailTable1 ul{*/
+  /*  list-style: none;*/
+  /*  display: flex;*/
+  /*  justify-content: space-around;*/
+  /*}*/
+  /*#locationDetailTable1 ul li{*/
+  /*  width: 100%;*/
+  /*  text-align: center;*/
+  /*  background-color: #ecf0f1;*/
+  /*  line-height: 40px;*/
+  /*  height: 40px;*/
+  /*  border-radius: 10px;*/
+  /*  margin-bottom: 5px;*/
+  /*  font-size: 14px;*/
+  /*}*/
+  .dataTable1 {
+    border-collapse:separate;
+    border-spacing: 0 5px;
   }
-  #locationDetailTable1 ul li{
-    width: 100%;
-    text-align: center;
+  #locationDetailTable1 table tbody tr{
+  }
+  #locationDetailTable1 table tbody td{
+    width: 12%;
     background-color: #ecf0f1;
     line-height: 40px;
     height: 40px;
-    border-radius: 10px;
+    /*border-radius: 10px;*/
     margin-bottom: 5px;
     font-size: 14px;
   }
   #locationDetailTable1 .location {
+    width: 20%;
     background-color: #20a0ff;
     color: #fff;
     font-weight: 700;
@@ -826,23 +946,24 @@ import SwitchBar from '@/views/common/switchBar/index'
   .ass h4,h5 {
     color: #d3dce6;
   }
-  .last {
+  .pageLast {
     /*position: absolute;*/
     /*bottom: 0;*/
     /*left: 0;*/
     /*right: 0;*/
-    background-color: #fff;
-    height: 50px;
-    line-height: 50px;
-    width: 100%;
+    /*background-color: #fff;*/
+    /*height: 50px;*/
+    /*line-height: 50px;*/
+    /*width: 100%;*/
     /*margin-left: 80px;*/
+    margin-top: 300px;
   }
-  .last span {
+  .pageLast span {
     margin-left: 10px;
     font-size: 12px;
     color: #5a5e66;
   }
-  .last span:nth-child(1){
+  .pageLast span:nth-child(1){
     margin-left: 550px;
   }
   .share {
@@ -853,5 +974,43 @@ import SwitchBar from '@/views/common/switchBar/index'
     bottom: 20px;
     background-color: #20a0ff;
     border-radius: 50px;
+  }
+  .title {
+    background-color: #ecf0f1;
+    line-height: 40px;
+    height: 40px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+  .tipLoad {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 500px;
+    height: 500px;
+    background-image: url("../depent/tip/loading2.gif");
+    background-size: 100% 100%;
+    /*background-color: #fff;*/
+  }
+  .lastLast {
+    background-color: #fff;
+    height: 50px;
+    line-height: 50px;
+    width: 100%;
+  }
+  .unique {
+    background-color: #99a9bf;
+    border-radius: 20px;
+  }
+  .unique>div {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+    line-height: 40px;
+    height: 40px;
   }
 </style>

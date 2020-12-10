@@ -18,6 +18,9 @@ import '@/icons' // icon
 import echarts from 'echarts'
 Vue.prototype.$echarts = echarts
 
+import VueResource from 'vue-resource'
+Vue.use(VueResource)
+
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api

@@ -164,6 +164,14 @@ export const constantRoutes = [
     component: () => import('@/views/badShow/index'),
     meta: { title: 'badShow', icon: 'badShow' }
   },
+  {
+    path: '/*',
+    redirect: '/'
+  },
+  // {
+  //   path: '/secondBigMap-Pic',
+  //   redirect: '/'
+  // },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
